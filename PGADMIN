@@ -1,0 +1,71 @@
+CREATE TABLE kaggle_catch(
+	capture_rate DECIMAL(5,2),
+	escape_rate	DECIMAL(5,2),
+	weight DECIMAL(5,2),
+	height DECIMAL(5,2),
+	legendary BOOLEAN,
+	c_primary_key INTEGER PRIMARY KEY
+);
+
+CREATE TABLE kaggle_battle(
+	maxhp INTEGER,
+	maxcp INTEGER,
+	stamina INTEGER,
+	attack INTEGER,
+	defense INTEGER,
+	stats INTEGER,
+	primary_key INTEGER PRIMARY KEY
+);
+
+
+
+
+CREATE TABLE kaggle_name(
+	pokedex INTEGER,
+	name VARCHAR(100),
+	generation INTEGER,
+	primary_type VARCHAR(100),
+	secondary_type VARCHAR(100),
+	catch_fk INTEGER,
+	battle_fk INTEGER,
+	FOREIGN KEY (catch_fk) REFERENCES kaggle_catch(c_primary_key),
+	FOREIGN KEY (battle_fk) REFERENCES kaggle_battle(primary_key),
+	pk INTEGER PRIMARY KEY
+);
+
+
+
+CREATE TABLE rapid_catch (
+	attack_probability DECIMAL(5,2),
+	base_capture_rate DECIMAL(5,2),
+	base_flee_rate DECIMAL(5,2),
+	dodge_probability DECIMAL(5,2),
+	max_pokemon_action_frequency DECIMAL(5,2),
+	min_pokemon_action_frequency DECIMAL(5,2),
+	primary_key INTEGER PRIMARY KEY
+);
+
+CREATE TABLE rapid_battle(
+	max_cp INTEGER, 
+	stamina INTEGER,
+	attack INTEGER,
+	defense INTEGER,
+	total_stats INTEGER,
+	primary_key INTEGER PRIMARY KEY
+);
+
+
+
+
+CREATE TABLE rapid_name(
+	pokemon_id INTEGER,
+	name TEXT,
+	primary_type VARCHAR(100),
+	secondary_type VARCHAR(100),
+	form VARCHAR(100),
+	battle_fk INTEGER,
+	catch_fk INTEGER,
+	FOREIGN KEY (catch_fk) REFERENCES rapid_catch(primary_key),
+	FOREIGN KEY (battle_fk) REFERENCES rapid_battle(primary_key),
+	pk INTEGER PRIMARY KEY
+);
